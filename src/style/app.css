@@ -1,0 +1,19 @@
+#app {
+  height: 100%
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+}
+
+.view {
+  padding: 20px;
+  flex: 1;
+}
