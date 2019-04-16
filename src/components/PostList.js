@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'antd'
+import { Table, Button, Popconfirm, Tag } from 'antd'
 import axios from 'axios'
 
 class PostList extends Component {
@@ -21,6 +21,31 @@ class PostList extends Component {
       key: 'summary',
       dataIndex: 'summary'
     }, {
+      title: '分类',
+      key: 'category',
+      dataIndex: 'category',
+      render: (text, record) => {
+        return (
+          <span>{text.name}</span>
+        )
+      }
+    }, {
+      title: '标签',
+      key: 'tags',
+      dataIndex: 'tags',
+      render: (text, record) => {
+        const tags = text.map(item => {
+          return (
+            <Tag key={item._id}>
+              {item.name}
+            </Tag>
+          )
+        })
+        return (
+          <div>{tags}</div>
+        )
+      }
+    }, {
       title: '发布日期',
       key: 'createAt',
       dataIndex: 'createAt'
@@ -30,7 +55,9 @@ class PostList extends Component {
       dataIndex: 'control',
       render: (text, record) => {
         return (
-          <Button onClick={() => {this.deletePost(record._id)}} type="danger">删除</Button>
+          <Popconfirm title="是否删除" onConfirm={() => {this.deletePost(record._id)}}>
+            <Button type="danger">删除</Button>
+          </Popconfirm>
         )
       }
     }]
@@ -47,6 +74,9 @@ class PostList extends Component {
   }
   deletePost (id) {
     axios.post('http://localhost:4000/blog/api/post/delete', { id }).then(res => {
+      if (res.data.code === 0) {
+        this.getUserList()
+      }
     })
   }
   render () {

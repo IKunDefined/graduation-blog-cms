@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'antd';
+import { Table, Button, Popconfirm } from 'antd';
 import axios from 'axios'
 
 class UserList extends Component {
@@ -31,7 +31,9 @@ class UserList extends Component {
       dataIndex: 'control',
       render: (text, record) => {
         return (
-          <Button onClick={() => {this.deleteUser(record._id)}} type="danger">删除</Button>
+          <Popconfirm title="是否删除" onConfirm={() => {this.deleteUser(record._id)}}>
+            <Button type="danger">删除</Button>
+          </Popconfirm>
         )
       }
     }]
@@ -39,15 +41,18 @@ class UserList extends Component {
   componentDidMount () {
     this.getUserList()
   }
-  getUserList () {
+  getUserList = () => {
     axios.get("http://localhost:4000/blog/api/user/list").then(res => {
       this.setState({
         data: res.data.result
       })
     })
   }
-  deleteUser (id) {
+  deleteUser = (id) => {
     axios.post('http://localhost:4000/blog/api/user/delete', { id }).then(res => {
+      if (res.data.code === 0) {
+        this.getUserList()
+      }
     })
   }
   render () {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table, Button, Modal, Input } from 'antd'
+import { Table, Button, Modal, Input, Popconfirm } from 'antd'
 import axios from 'axios'
 
 class CateList extends Component {
@@ -24,15 +24,17 @@ class CateList extends Component {
       dataIndex: 'control',
       render: (text, record) => {
         return (
-          <Button onClick={() => {this.deleteCate(record._id)}} type="danger">删除</Button>
+          <Popconfirm title="是否删除" onConfirm={() => {this.deleteCate(record._id)}}>
+            <Button type="danger">删除</Button>
+          </Popconfirm>
         )
       }
     }]
   }
   componentDidMount () {
-    this.getUserList()
+    this.getCateList()
   }
-  getUserList = () => {
+  getCateList = () => {
     axios.get("http://localhost:4000/blog/api/category/list").then(res => {
       this.setState({
         data: res.data.result
@@ -41,10 +43,16 @@ class CateList extends Component {
   }
   deleteCate = (id) => {
     axios.post('http://localhost:4000/blog/api/category/delete', { id }).then(res => {
+      if (res.data.code === 0) {
+        this.getCateList()
+      }
     })
   }
   handleOk = (category) => {
     axios.post('http://localhost:4000/blog/api/category/create', { category }).then(res => {
+      if (res.data.code === 0) {
+        this.getCateList()
+      }
     })
     this.setState({
       visible: false
