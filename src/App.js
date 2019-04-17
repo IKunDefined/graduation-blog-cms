@@ -12,6 +12,7 @@ import CateList from './components/CateList'
 import TagList from './components/TagList'
 import MessList from './components/MessList'
 import VedioUpdate from './components/VideoUpdate'
+import ActList from './components/ActList'
 import './style/reset.css'
 import './style/app.css'
 
@@ -81,6 +82,13 @@ class App extends Component {
                       <Link to="/videoupdate"><Icon type="upload"/>视频上传</Link>
                     </Menu.Item>
                   </SubMenu>
+                  <SubMenu
+                    title={<span><Icon type="compass"/>动态管理</span>}
+                  >
+                    <Menu.Item>
+                      <Link to="/actlist"><Icon type="bars"/>动态列表</Link>
+                    </Menu.Item>
+                  </SubMenu>
                 </Menu>
               </div>
               <div className="view">
@@ -91,6 +99,7 @@ class App extends Component {
                 <Route path="/taglist" component={TagList}></Route>
                 <Route path="/messlist" component={MessList}></Route>
                 <Route path="/videoupdate" component={VedioUpdate}></Route>
+                <Route path="/actlist" component={ActList}></Route>
               </div>
             </div>
           </div>

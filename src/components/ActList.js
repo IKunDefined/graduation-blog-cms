@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Table, Button, Popconfirm } from 'antd'
 import axios from 'axios'
 
-class MessList extends Component {
+class ActList extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -13,13 +13,9 @@ class MessList extends Component {
       dataIndex: '_id',
       key: '_id'
     }, {
-      title: '留言内容',
+      title: '动态内容',
       dataIndex: 'content',
       key: 'content'
-    }, {
-      title: '留言用户',
-      dataIndex: 'username',
-      key: 'username'
     }, {
       title: '评论数量',
       key: 'comment',
@@ -42,7 +38,7 @@ class MessList extends Component {
       dataIndex: 'control',
       render: (text, record) => {
         return (
-          <Popconfirm title="是否删除" onConfirm={() => {this.deleteMess(record._id)}}>
+          <Popconfirm title="是否删除" onConfirm={() => {this.deleteAct(record._id)}}>
             <Button type="danger">删除</Button>
           </Popconfirm>
         )
@@ -50,19 +46,19 @@ class MessList extends Component {
     }]
   }
   componentDidMount () {
-    this.getMessList()
+    this.getActList()
   }
-  getMessList = () => {
-    axios.get("http://localhost:4000/blog/api/message/list").then(res => {
+  getActList = () => {
+    axios.get("http://localhost:4000/blog/api/activity/list").then(res => {
       this.setState({
         data: res.data.result
       })
     })
   }
-  deleteMess = (id) => {
-    axios.post('http://localhost:4000/blog/api/message/delete', { id }).then(res => {
+  deleteAct = (id) => {
+    axios.post('http://localhost:4000/blog/api/activity/delete', { id }).then(res => {
       if (res.data.code === 0) {
-        this.getMessList()
+        this.getActList()
       }
     })
   }
@@ -75,4 +71,4 @@ class MessList extends Component {
   }
 }
 
-export default MessList
+export default ActList

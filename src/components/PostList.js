@@ -50,6 +50,22 @@ class PostList extends Component {
       key: 'createAt',
       dataIndex: 'createAt'
     }, {
+      title: '评论数量',
+      key: 'comment',
+      dataIndex: 'comment',
+      render: (text) => {
+        if (text.length !== 0) {
+          return (
+            <span><a href="javascript:;">{text.length}</a></span>
+          )
+        } else {
+          return (
+            <span>{text.length}</span>
+          )
+        }
+        
+      }
+    }, {
       title: '操作',
       key: 'control',
       dataIndex: 'control',
