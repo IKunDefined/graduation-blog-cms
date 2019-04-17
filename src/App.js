@@ -10,6 +10,8 @@ import PostList from './components/PostList'
 import PostEdit from './components/PostEdit'
 import CateList from './components/CateList'
 import TagList from './components/TagList'
+import MessList from './components/MessList'
+import VedioUpdate from './components/VideoUpdate'
 import './style/reset.css'
 import './style/app.css'
 
@@ -25,8 +27,7 @@ class App extends Component {
               mode="horizontal"
             >
               <Menu.Item>
-                <Icon type="home"/>
-                IKunDefined
+                <a href="http://localhost:8080/"><Icon type="home"/>IKunDefined</a>
               </Menu.Item>
             </Menu>
             <div className="main">
@@ -66,6 +67,20 @@ class App extends Component {
                       </Menu.Item>
                     </SubMenu>
                   </SubMenu>
+                  <SubMenu
+                    title={<span><Icon type="message"/>留言管理</span>}
+                  >
+                    <Menu.Item>
+                      <Link to="/messlist"><Icon type="bars"/>留言列表</Link>
+                    </Menu.Item>
+                  </SubMenu>
+                  <SubMenu
+                    title={<span><Icon type="play-circle"/>视频管理</span>}
+                  >
+                    <Menu.Item>
+                      <Link to="/videoupdate"><Icon type="upload"/>视频上传</Link>
+                    </Menu.Item>
+                  </SubMenu>
                 </Menu>
               </div>
               <div className="view">
@@ -74,6 +89,8 @@ class App extends Component {
                 <Route path="/postedit" component={PostEdit}></Route>
                 <Route path="/catelist" component={CateList}></Route>
                 <Route path="/taglist" component={TagList}></Route>
+                <Route path="/messlist" component={MessList}></Route>
+                <Route path="/videoupdate" component={VedioUpdate}></Route>
               </div>
             </div>
           </div>
