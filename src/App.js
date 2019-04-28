@@ -11,7 +11,7 @@ import PostEdit from './components/PostEdit'
 import CateList from './components/CateList'
 import TagList from './components/TagList'
 import MessList from './components/MessList'
-import VedioUpdate from './components/VideoUpdate'
+// import VedioUpdate from './components/VideoUpdate'
 import ActList from './components/ActList'
 import './style/reset.css'
 import './style/app.css'
@@ -75,13 +75,13 @@ class App extends Component {
                       <Link to="/messlist"><Icon type="bars"/>留言列表</Link>
                     </Menu.Item>
                   </SubMenu>
-                  <SubMenu
+                  {/* <SubMenu
                     title={<span><Icon type="play-circle"/>视频管理</span>}
                   >
                     <Menu.Item>
                       <Link to="/videoupdate"><Icon type="upload"/>视频上传</Link>
                     </Menu.Item>
-                  </SubMenu>
+                  </SubMenu> */}
                   <SubMenu
                     title={<span><Icon type="compass"/>动态管理</span>}
                   >
@@ -98,7 +98,7 @@ class App extends Component {
                 <Route path="/catelist" component={CateList}></Route>
                 <Route path="/taglist" component={TagList}></Route>
                 <Route path="/messlist" component={MessList}></Route>
-                <Route path="/videoupdate" component={VedioUpdate}></Route>
+                {/* <Route path="/videoupdate" component={VedioUpdate}></Route> */}
                 <Route path="/actlist" component={ActList}></Route>
               </div>
             </div>
